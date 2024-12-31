@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 from flask_sqlalchemy import SQLAlchemy
 # SQLAlchemy
 from sqlalchemy import create_engine
@@ -26,7 +26,16 @@ class Item(db.Model):
     description = db.Column(db.Text, nullable=True)
 
     def __repr__(self):
-        return f"Item('{self.id}', '{self.name}', '{self.code}', '{self.price}')"
+        return f"<Item {self.name}>"
+
+    def json(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "code": self.code,
+            "price": self.price,
+            "description": self.description
+        }
 
 # Create Database
 engine = create_engine("sqlite:///store.db")
@@ -54,3 +63,18 @@ def page_products():
         { "id": 2, "name": "Keyboard", "code": "024109", "price": "500" }
     ]
     return render_template('products.html', items=items)
+
+@app.route('/create', methods=['POST'])
+def create_item():
+    item = Item(name="Book", code="1451", price=100, description="Amazing Book")
+
+    db.session.add(item)
+    db.session.commit()
+
+    return 'Item created'
+
+@app.route("/users")
+def user_list():
+    items = db.session.execute(db.select(Item).order_by(Item.id)).scalars()
+    data = [item.json() for item in items]
+    return jsonify(data)
