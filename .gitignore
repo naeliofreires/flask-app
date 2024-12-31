@@ -1,0 +1,55 @@
+# Byte-compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment variables
+.env
+.env.*
+
+# Virtual environment
+venv/
+
+# Instance folder (used in Flask apps for configuration)
+instance/
+
+# Database files
+*.sqlite3
+*.db
+
+# Logs
+*.log
+logs/
+
+# Cache files
+*.pyc
+.cache
+
+# Coverage reports
+htmlcov/
+.coverage
+*.cover
+*.py,cover
+
+# Testing artifacts
+.tox/
+.nox/
+pytest_cache/
+*.pytest_cache
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*~
+*.sublime-workspace
+*.sublime-project
+
+# Flask-specific temporary files
+flask_session/
+
+# Build artifacts
+build/
+dist/
+*.egg-info
+.eggs/
