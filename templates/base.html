@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <script
+        src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                fontFamily: {
+                    sans: ["Graphik", "sans-serif"],
+                    serif: ["Merriweather", "serif"],
+                },
+            },
+        };
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+        .content-auto {
+          content-visibility: auto;
+        }
+      }
+    </style>
+    <title>
+        {% block titulo %}
+        {% endblock %}
+    </title>
+</head>
+
+<body>
+    <div aria-label="nav-bar container">
+        <nav class="flex items-center justify-between p-6 lg:px-8 gap-4" aria-label="Global">
+            <div class="flex lg:flex-1 min-w-fit">
+                <a href="#" class="-m-1.5 p-1.5">
+                    <h1 class="text-balance text-5xl font-semibold tracking-tight text-amber-900 sm:text-1xl">
+                        e-commerce
+                    </h1>
+                </a>
+            </div>
+
+            <div class="flex items-center justify-between w-full mx-auto px-4">
+                <div class="hidden lg:flex lg:gap-x-12">
+                    <a href="{{url_for('page_home')}}" class="text-sm/6 font-semibold text-gray-900">Home</a>
+                    <a href="{{url_for('page_products')}}" class="text-sm/6 font-semibold text-gray-900">Items</a>
+                </div>
+
+                <div class="hidden lg:flex lg:gap-x-12">
+                    <a href="#" class="text-sm/6 font-semibold text-gray-900">Sign-in</a>
+                    <a href="#" class="text-sm/6 font-semibold text-gray-900">Sign-up</a>
+                </div>
+            </div>
+        </nav>
+
+        {% block content %}
+
+        {% endblock %}
+    </div>
+</body>
+
+</html>
