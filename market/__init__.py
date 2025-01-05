@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+
 # SQLAlchemy
 from sqlalchemy import create_engine
 from sqlalchemy.orm import DeclarativeBase
@@ -22,13 +23,16 @@ engine = create_engine("sqlite:///store.db")
 if not database_exists(engine.url):
     create_database(engine.url)
 
+# Models
+from market.models import User, Item
+
+# Create Tables
 with app.app_context():
-    # db.drop_all()
     db.create_all()
 
 # Database Status
 print(f'DB is created: {database_exists(engine.url)}')
 print(f'DB: {engine.url}')
 
-
+# Initialize Routes
 from market import routes
